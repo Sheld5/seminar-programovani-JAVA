@@ -1,4 +1,29 @@
 import cz.alisma.alej.prog.pg16.QuadraticEquationGenerator;
 import cz.alisma.alej.prog.pg16.QuadraticEquationPrinter;
 
-public class HtmlPrinter implements QuadraticEquationPrinter
+public class HtmlPrinter implements QuadraticEquationPrinter {
+	public void begin() {
+		System.out.printf("<html>\n\t<head></head>\n\t<body>\n\t\t");
+	}
+	public void end() {
+		System.out.printf("\n\t</body>\n</html>\n");
+	}
+	public void printEquation(int a, int b, int c, int x1, int x2) {
+		if (a < 0) {
+			System.out.printf("- %dx² ", -a);
+		} else {
+			System.out.printf("  %dx² ", a);
+		}
+		if (b < 0) {
+			System.out.printf("- %dx ", -b);
+		} else {
+			System.out.printf("+ %dx ", b);
+		}
+		if (c < 0) {
+			System.out.printf("- %d = ", -c);
+		} else {
+			System.out.printf("+ %d = ", c);
+		}
+		System.out.printf("\n");
+	}
+}
