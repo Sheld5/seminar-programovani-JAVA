@@ -8,7 +8,10 @@ public class Rovnice {
 		if (s == 0) {
 			QuadraticEquationPrinter printer = new ScreenPrinter();
 		} else if (s == 1) {
+<<<<<<< HEAD
 			System.out.printf("<html>\n\t<head></head>\n\t<body>\n\t\t");
+=======
+>>>>>>> 3505904efa345c0f59d27228170d8947ea341a8f
 			QuadraticEquationPrinter printer = new HtmlPrinter();
 		}
 

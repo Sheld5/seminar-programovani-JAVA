@@ -18,5 +18,6 @@ public class ScreenPrinter implements QuadraticEquationPrinter {
 		} else {
 			System.out.printf("+ %d = \n", c);
 		}
+		System.out.printf("\n");
 	}
 }
