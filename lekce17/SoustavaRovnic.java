@@ -1,15 +1,7 @@
 public class SoustavaRovnic {
 
-	public static int DelkaCisla(int cislo){
-		int delkaCisla = 1;
-      	while (cislo >= 10) {
-			cislo /= 10;
-      		delkaCisla++;
-      	}
-      	return delkaCisla;
-	}
-
 	public static void main(String[] args) {
+
 		int pocetNeznamych = Integer.parseInt(args[0]);
 		int matice[][] = new int[pocetNeznamych][pocetNeznamych + 1];
 		java.util.Scanner sc = new java.util.Scanner(System.in);
@@ -19,24 +11,45 @@ public class SoustavaRovnic {
 			}
 		}
 
-		for (int i = 1; i < pocetNeznamych; i++) {
-			for (int radek = i; radek < pocetNeznamych; radek++) {
-				for (int sloupec = i - 1; sloupec < pocetNeznamych + 1; sloupec++) {
-					matice[radek][sloupec] = matice[i - 1][i - 1] * matice[radek][sloupec] - matice[radek][i - 1] * matice[i - 1][sloupec];
+		for (int i = 0; i < pocetNeznamych - 1; i++) {
+			for (int radek = i + 1; radek < pocetNeznamych; radek++) {
+				int prvniCisloVRadku = matice[radek][i];
+				for (int sloupec = i; sloupec < pocetNeznamych + 1; sloupec++) {
+					matice[radek][sloupec] = matice[i][i] * matice[radek][sloupec] - prvniCisloVRadku * matice[i][sloupec];
 				}
 			}
 		}
 
-		System.out.println();
-		for (int radek = 0; radek < pocetNeznamych; radek++) {
-			for (int sloupec = 0; sloupec < pocetNeznamych + 1; sloupec++) {
-				if (sloupec == pocetNeznamych) {
-					System.out.printf(" | %d", matice[radek][sloupec]);
+		double vysledky[] = new double[pocetNeznamych];
+		for (int radek = pocetNeznamych - 1; radek >= 0; radek--) {
+			vysledky[radek] = (double) matice[radek][pocetNeznamych];
+			for (int sloupec = pocetNeznamych - 1; sloupec > radek; sloupec--) {
+				vysledky[radek] -= (double) matice[radek][sloupec] * vysledky[sloupec];
+			}
+			vysledky[radek] /= (double) matice[radek][radek];
+		}
+
+		boolean zapornyVysledek = false;
+		for (int i = 0; i < pocetNeznamych; i++) {
+			if (vysledky[i] < 0) {
+				zapornyVysledek = true;
+			}
+		}
+		if (zapornyVysledek) {
+			for (int i = 0; i < pocetNeznamych; i++) {
+				if (vysledky[i] < 0) {
+					System.out.printf("\n x%d = %.2f", i + 1, vysledky[i]);
 				} else {
-					System.out.printf(" %d", matice[radek][sloupec]);
+					System.out.printf("\n x%d =  %.2f", i + 1, vysledky[i]);
 				}
 			}
-			System.out.println();
+		} else {
+			for (int i = 0; i < pocetNeznamych; i++) {
+			System.out.printf("\n x%d = %.2f", i + 1, vysledky[i]);
+			}
 		}
+		System.out.println();
+
 	}
+
 }
