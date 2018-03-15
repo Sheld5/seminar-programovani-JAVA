@@ -1,5 +1,4 @@
 public class SoustavaRovnic {
-
 	public static void main(String[] args) {
 
 		int pocetNeznamych = Integer.parseInt(args[0]);
@@ -51,5 +50,4 @@ public class SoustavaRovnic {
 		System.out.println();
 
 	}
-
 }
